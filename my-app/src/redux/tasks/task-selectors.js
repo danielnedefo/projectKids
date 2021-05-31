@@ -1,0 +1,1 @@
+export const task = state => state.task.tasks
