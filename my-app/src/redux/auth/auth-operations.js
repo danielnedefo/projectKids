@@ -21,6 +21,7 @@ export const login = loginData => async dispatch => {
   try {
     const { data } = await httpService.postSmth(endpoints.postLogin, loginData)
     tokenOperations.set(data.token)
+    localStorage.setItem('token',data.token)
     dispatch(authActions.loginSuccess(data))
         console.log(data)
   } catch (error) {
@@ -41,6 +42,9 @@ export const logout = () => async dispatch => {
   try {
     const { data } = await httpService.postSmth(endpoints.postLogOut)
     tokenOperations.unset()
+    console.log(data)
+    localStorage.removeItem('token')
+    localStorage.removeItem('pointsPlaned')
     dispatch(authActions.logOutSuccess(data))
   } catch (error) {
     dispatch(authActions.logOutError(error))

@@ -1,33 +1,28 @@
 import {useState} from 'react'
 import ButtonSubmitDays from '../ButtonSubmitForResponsedDays/ButtonSubmitDays'
 import CheckBoxItem from '../CheckBoxItem/CheckBoxItem'
-const CheckboxesForDays = ({ days, id }) => {
-  const [indexes, setindexes] = useState({})
+const daysisActive = Array(7).fill(false)
+const CheckboxesForDays = ({ days, id, idx }) => {
+  const index = id || idx
+  const [indexes, setindexes] = useState(daysisActive)
   const handleIndex = (idx, active) => {
-    // console.log(idx,active)
-    // setindexes([...indexes, idx])
-    // console.log(indexes)
-    setindexes({...indexes,[idx]:active})
+    console.log(active)
+    const newInexes = [...indexes]
+    newInexes[idx] = !newInexes[idx];
+    setindexes(newInexes)
   }
-  // const handleChange = ({ target }) => {
-  //     const {checked} = target
-  //     console.log()
-  //   return !checked
-  // }
+  // console.log(indexes)
   const inputForDays = days.map(({ date, isActive }, index) => {
     return (
         <li key={index}  >
-        <CheckBoxItem date={date} isActive={isActive} index={index} handleIndex={handleIndex} />
+        <CheckBoxItem date={date} isActive={isActive} checked={daysisActive[index]} handleIndex={()=>handleIndex(index,isActive)} />
       </li>
     )
-  }
-  
-  )
-
+  })
   return (
     <ul>
       {inputForDays}
-      <ButtonSubmitDays id={id} index={indexes}/>
+      <ButtonSubmitDays id={index} index={indexes}/>
     </ul>
    );
 }

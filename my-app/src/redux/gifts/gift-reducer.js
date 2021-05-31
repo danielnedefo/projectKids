@@ -6,7 +6,7 @@ const getGifts = createReducer([], {
   [giftActions.getGiftsSuc]: (_, { payload }) => payload.ruGifts,
 })
 const buyGifts = createReducer([], {
-  [giftActions.buyGiftsSuc]:(_,{payload}) => payload
+  [giftActions.buyGiftsSuc]:(state,{payload}) => [...state,...payload.purchasedGiftIds]
 })
 
 const error = createReducer(null, {

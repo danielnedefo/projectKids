@@ -1,4 +1,4 @@
-import { useSelector,useCallback } from 'react-redux'
+import { useSelector,useCallback,shallowEqual } from 'react-redux'
 import {useState} from 'react'
 import DaysNavigation from '../DaysNavigation/DayNavigation'
 import Monday from '../WeekTabs/Monday/Monday'
@@ -8,11 +8,15 @@ import Thursday from '../WeekTabs/Thursday/Thursday'
 import Friday from '../WeekTabs/Friday/Friday'
 import Saturday from '../WeekTabs/Saturday/Saturday'
 import Sunday from '../WeekTabs/Sunday/Sunday'
+import authSelectors from '../../../redux/auth/auth-selectors'
 import DateSelectors from '../../../redux/data/data-selectors'
+import GiftSelectors from '../../../redux/gifts/gifts-selector'
 const arrForDates = []
 const MainPage = () => {
+  const balance = useSelector(authSelectors.balance, shallowEqual)
+  const planedRewards = localStorage.getItem('pointsPlaned')
   const [dayToRender, setdayToRender] = useState('')
-  const data = useSelector(DateSelectors)
+  const data = useSelector(DateSelectors,shallowEqual)
   const dateFunction =  arr => {
     if (arr.length > 0) {
     const [firsData,secondData] = data
@@ -47,6 +51,8 @@ const MainPage = () => {
   }
 
   return (<>
+    <p>Balance : {balance} </p>
+    <p>Planned Points for week : {planedRewards}</p>
     <DaysNavigation handleClick={handleClick}/>
     {dayToRender === 'Monday' && <Monday />} 
     {dayToRender === 'Tuesday' && <Tuesday />}

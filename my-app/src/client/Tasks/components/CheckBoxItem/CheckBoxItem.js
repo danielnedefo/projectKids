@@ -1,16 +1,16 @@
 import {useState} from 'react'
-const CheckBoxItem = ({ date, handleIndex, isActive,index }) => {
-  // console.log(isActive)
+const CheckBoxItem = ({ date, handleIndex, isActive,checked }) => {
+  // console.log(checked)
   const [stateCheckbox, setstateCheckbox] = useState(isActive)
   const handleChange = () => {
     setstateCheckbox(!stateCheckbox)
   }
-  // console.log(stateCheckbox)
+  // // console.log(stateCheckbox)
 
   return (
 
     <>
-      <input id={date} onChange={handleChange} onClick={() => handleIndex(index,stateCheckbox)} type="checkbox" checked={stateCheckbox} />{date}
+      <input id={date} onChange={handleChange} onClick={handleIndex} checked={stateCheckbox} type="checkbox" />{date}
       </>
    );
 }

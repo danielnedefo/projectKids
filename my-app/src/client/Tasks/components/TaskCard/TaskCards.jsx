@@ -4,10 +4,10 @@ import CheckboxesForDays from '../CheckboxesForDays/CheckboxesForDays'
 
 const TaskCard = ({ cards }) => {
   console.log(cards)
-  const cardElements = cards.map(({ title, imageUrl, reward, days, _id }) =>
+  const cardElements = cards.map(({ title, imageUrl, reward, days, _id , id }) =>
     <li key={_id}>
       <TaskItem title={title} reward={reward} imageUrl={imageUrl}/>      
-        <CheckboxesForDays  id={_id} days={days} />
+        <CheckboxesForDays  id={_id} idx={id} days={days} />
     </li>);
   
   return (

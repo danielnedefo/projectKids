@@ -19,6 +19,7 @@ export const buyGifts = sum => async dispatch => {
   try {
     const { data } = await httpService.patchSmth(endpoints.patchGifts, sum)
     dispatch(giftActions.buyGiftsSuc(data))
+    console.log(data)
   } catch (error) {
     dispatch(giftActions.buyGiftsError(error))
   }

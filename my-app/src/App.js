@@ -22,7 +22,7 @@ function App() {
       <AppBar />
       <Switch>
         {!authorized && <Route exact path="/auth" component={LoginLogout} />}
-        <Route exact path="/" component={MainPage}/>
+        {authorized && <Route exact path="/" component={MainPage} />}
         <Route exact path="/awards" component={AwardPage}/>
         <Route exact path="/contacts" component={Contacts} />
         <Route exact path="/planning" component={Task}/>
